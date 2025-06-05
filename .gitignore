@@ -1,3 +1,4 @@
 dist/
 node_modules/
+scripts/output/*.json
 .DS_Store

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { serializeW3CImageAnnotation } from '@annotorious/annotorious';
 import MapReaderCSV from '../src/mapreader-csv';
 
-const FILENAME = 'foo'
+const FILENAME = 'EST_VH-560-FOL + VD-29 (3)-FT 6_Page_19'
 
 console.log('Converting file: ' + FILENAME);
 
@@ -14,13 +14,20 @@ MapReaderCSV.read(str).then((partials: any) => {
   const annotations = partials.map(partial => {
     const id = uuidv4();
 
+    const text = partial.bodies.find(b => !b.purpose)?.value;
+    const score = partial.bodies.find(b => b.purpose === 'scoring')?.value;
+
     const anno = {
       id,
       ...partial,
-      bodies: partial.bodies.map((body: any) => ({
+      bodies: [{
+        id: uuidv4(),
+        type: "TextualBody",
         annotation: id,
-        ...body
-      })),
+        purpose: 'commenting',
+        value: `${text} (${score})`,
+        created: new Date()
+      }],
       target: {
         annotation: id,
         ...partial.target
@@ -30,5 +37,5 @@ MapReaderCSV.read(str).then((partials: any) => {
     return serializeW3CImageAnnotation(anno, FILENAME);
   });
 
-  console.log(JSON.stringify(annotations, null, 2));
+  fs.writeFileSync(`./scripts/output/${FILENAME}.json`, JSON.stringify(annotations, null, 2), 'utf8');
 });
