@@ -9,17 +9,20 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy" : "gh-pages -d dist --nojekyll --cname 'mapreader.rainersimon.io'"
+    "convert": "tsx scripts/convert-to-immarkus",
+    "deploy": "gh-pages -d dist --nojekyll --cname 'mapreader.rainersimon.io'"
   },
   "devDependencies": {
+    "@annotorious/annotorious": "^3.4.3",
     "@types/openseadragon": "^4.1.0",
     "@types/papaparse": "^5.3.16",
     "gh-pages": "^6.3.0",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@annotorious/openseadragon": "^3.4.2",
+    "@annotorious/openseadragon": "^3.4.3",
     "openseadragon": "^5.0.1",
     "papaparse": "^5.5.3",
     "simplify-js": "^1.2.4",
