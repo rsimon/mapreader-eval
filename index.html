@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <title>MapReader | Demo</title>
     <style>
       html, body {
@@ -57,14 +58,19 @@
         position: absolute;
         bottom: 20px;
         left: 20px;
-        line-height: 180%;
+        line-height: 160%;
+        max-width: 400px;
         padding: 0.5rem 1rem;
         z-index: 20;
       }
 
       #info p {
         margin: 0;
-        padding: 0;
+        padding: 0.25rem 0;
+      }
+
+      p.about, p.about a {
+        color: #8f8f8f;
       }
     </style>
     <script type="module" crossorigin src="/assets/index-AuisCBLV.js"></script>
@@ -80,6 +86,9 @@
       </p>
       <p>
         Map source: <a href="https://www.loc.gov/resource/g7823g.ct000751/?r=0.26,0.046,0.659,0.34,0" target="_blank">Novvs atlas Sinensis</a>, Library of Congress, Geography and Map Division.
+      </p>
+      <p class="about">
+        About <a href="https://rainersimon.io" target="_blank">rainersimon.io</a>
       </p>
     </div>
   </body>
