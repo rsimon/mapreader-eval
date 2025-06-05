@@ -3,11 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { serializeW3CImageAnnotation } from '@annotorious/annotorious';
 import MapReaderCSV from '../src/mapreader-csv';
 
-const FILENAME = 'EST_VH-560-FOL + VD-29 (3)-FT 6_Page_19'
+const INPUT = './public/maps/test_predictions.csv';
+const OUTPUT = 'EST_VH-560-FOL + VD-29 (3)-FT 6_Page_19'
 
-console.log('Converting file: ' + FILENAME);
+console.log('Converting file: ' + OUTPUT);
 
-const str = fs.readFileSync('./public/maps/test_predictions.csv', 'utf8');
+const str = fs.readFileSync(INPUT, 'utf8');
 MapReaderCSV.read(str).then((partials: any) => {
 
   // Turn into full-blown annotation objects
@@ -34,8 +35,10 @@ MapReaderCSV.read(str).then((partials: any) => {
       }
     }
 
-    return serializeW3CImageAnnotation(anno, FILENAME);
+    return serializeW3CImageAnnotation(anno, OUTPUT);
   });
 
-  fs.writeFileSync(`./scripts/output/${FILENAME}.json`, JSON.stringify(annotations, null, 2), 'utf8');
+  fs.writeFileSync(`./scripts/output/${OUTPUT}.json`, JSON.stringify(annotations, null, 2), 'utf8');
+
+  console.log('Done.');
 });
